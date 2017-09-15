@@ -1,0 +1,38 @@
+.bardash-wrapper {
+    width: 100%;
+    position: relative;
+    margin-bottom: 3px;
+    .bar {
+        position: absolute;
+        background: orange;
+        bottom: 0;
+    }
+    .dash {
+        background: green;
+        position: absolute;
+        top: 100%;
+        height: 4px;
+    }
+    .bar-labels {
+        height: 14px;
+        position: absolute;
+        bottom: 0;
+        font-size: 9px;
+        text-align: center;
+    }
+}
+
+.labels-wrapper {
+    width: 100%;
+    margin: 2px 0px;
+    color: white;
+    position: relative;
+    height: 20px;
+    .label {
+        height: 14px;
+        position: absolute;
+        top: 0;
+        font-size: 9px;
+        text-align: center;
+    }
+}

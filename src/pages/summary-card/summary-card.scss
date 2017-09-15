@@ -1,0 +1,93 @@
+    $legend_circle_dimen: 10px;
+    .card {
+        .title {
+            width: 70%;
+            float: left;
+            padding: 2px 6px;
+            height: 30px;
+            font-size: 16px;
+            line-height: 30px;
+            text-overflow: ellipsis;
+        }
+        .email-icon {
+            width: 29%;
+            float: left;
+            padding: 0px 12px;
+            img {
+                border-right-width: 8px;
+                border-left-width: 8px;
+                border-top-width: 6px;
+                border-bottom-width: 0px;
+                border-top-left-radius: 4px;
+                border-top-right-radius: 4px;
+                border-color: white;
+                border-style: solid;
+                height: 20px;
+                margin-top: 10px;
+                float: right;
+                background-color: white;
+                box-shadow: 1px -2px 4px rgba(0, 0, 0, 0.2);
+            }
+        }
+        ion-card {
+            padding: 0px;
+            margin: 0px;
+            width: 100%;
+            border-radius: 4px;
+            ion-card-content {
+                padding: 0px;
+                margin: 0px;
+            }
+            ion-grid {
+                padding: 0px;
+                margin: 0px;
+            }
+            .legend {
+                line-height: 10px;
+                font-size: 10px;
+                padding: 2px;
+                span {
+                    line-height: 10px;
+                    font-size: 10px;
+                }
+                span::before {
+                    margin-right: 8px;
+                    content: '';
+                    display: inline-block;
+                    height: $legend_circle_dimen;
+                    width: $legend_circle_dimen;
+                    -moz-border-radius: $legend_circle_dimen;
+                    -webkit-border-radius: $legend_circle_dimen;
+                    border-radius: $legend_circle_dimen;
+                    line-height: 10px;
+                    font-size: 10px;
+                    vertical-align: middle;
+                }
+            }
+            .leg-actual {
+                span::before {
+                    background-color: orange;
+                }
+            }
+            .leg-target {
+                span::before {
+                    background-color: green;
+                }
+            }
+            .leg-projected {
+                span::before {
+                    background-color: lightgray;
+                }
+            }
+            .barchart-wrapper {
+                min-height: 80px;
+                background-color: black;
+                barchart {
+                    width: 100%;
+                }
+            }
+            .bullet-container {
+                padding: 4px 6px;
+            }
+        }
+    }

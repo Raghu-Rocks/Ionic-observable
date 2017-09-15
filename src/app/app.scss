@@ -1,0 +1,65 @@
+// http://ionicframework.com/docs/theming/
+// App Global Sass
+// --------------------------------------------------
+// Put style rules here that you want to apply globally. These
+// styles are for the entire app and not just one component.
+// Additionally, this file can be also used as an entry point
+// to import other Sass files to be included in the output CSS.
+//
+// Shared Sass variables, which can be used to adjust Ionic's
+// default Sass variables, belong in "theme/variables.scss".
+//
+// To declare rules for a specific mode, create a child rule
+// for the .md, .ios, or .wp mode classes. The mode class is
+// automatically applied to the <body> element in the app.
+ion-app {
+    .side-nav {
+        ion-header {
+            background-color: $sidemenu_bg;
+            z-index: inherit;
+            ion-toolbar {
+                min-height: 108px;
+                .toolbar-background {
+                    background-color: $sidemenu_bg;
+                }
+                .toolbar-title {
+                    font-size: 3rem !important;
+                    font-weight: 300 !important;
+                    color: $sidemenu_text
+                }
+            }
+        }
+        ion-content {
+            background-color: $sidemenu_bg;
+            .fixed-content {
+                margin-top: 108px !important;
+            }
+            .scroll-content {
+                margin-top: 108px !important;
+            }
+            ion-list {
+                button {
+                    background-color: $sidemenu_bg;
+                    min-height: 64px;
+                    .item-inner {
+                        margin-right: 16px;
+                        border-bottom: 0.2px solid $sidemenu_text !important;
+                    }
+                    ion-label {
+                        font-weight: 300 !important;
+                        color: $sidemenu_text;
+                    }
+                    &:hover {
+                        background-color: $sidemenu_bg;
+                    }
+                    &:last-child {
+                        border-bottom-width: 0px !important;
+                        .item-inner {
+                            border-bottom-width: 0px !important;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

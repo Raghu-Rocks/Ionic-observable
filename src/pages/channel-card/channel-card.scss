@@ -1,0 +1,89 @@
+$legend_circle_dimen: 8px;
+.card {
+    .title {
+        width: 70%;
+        float: left;
+        padding: 2px 6px;
+        height: 30px;
+        font-size: 16px;
+        line-height: 30px;
+        text-overflow: ellipsis;
+    }
+    .email-icon {
+        width: 29%;
+        float: left;
+        padding: 0px 12px;
+        img {
+            border-right-width: 8px;
+            border-left-width: 8px;
+            border-top-width: 6px;
+            border-bottom-width: 0px;
+            border-top-left-radius: 4px;
+            border-top-right-radius: 4px;
+            border-color: white;
+            border-style: solid;
+            height: 20px;
+            margin-top: 10px;
+            float: right;
+            background-color: white;
+            box-shadow: 1px -2px 4px rgba(0, 0, 0, 0.2);
+        }
+    }
+    ion-card {
+        .legends-wrapper {
+            justify-content: center;
+        }
+        .donut-wrapper {
+            padding: 2px;
+            text-align: center;
+        }
+        .bullets-wrapper {
+            padding: 2px;
+            text-align: center;
+            ion-col[col-12] {
+                display: inline-block;
+            }
+        }
+        .legends {
+            text-overflow: ellipsis;
+            margin: 3px;
+            font-size: 10px;
+            &:before {
+                margin: 2px 4px;
+                content: '';
+                display: inline-block;
+                height: $legend_circle_dimen;
+                width: $legend_circle_dimen;
+                -moz-border-radius: $legend_circle_dimen;
+                -webkit-border-radius: $legend_circle_dimen;
+                border-radius: $legend_circle_dimen;
+                vertical-align: middle;
+            }
+        }
+        .legends:nth-child(1) {
+            &:before {
+                background-color: #d5406a;
+            }
+        }
+        .legends:nth-child(2) {
+            &:before {
+                background-color: #0d6580;
+            }
+        }
+        .legends:nth-child(3) {
+            &:before {
+                background-color: #21daa0;
+            }
+        }
+        .legends:nth-child(4) {
+            &:before {
+                background-color: #d3885f;
+            }
+        }
+        .legends:nth-child(5) {
+            &:before {
+                background-color: #0b94ff;
+            }
+        }
+    }
+}

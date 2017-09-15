@@ -57,3 +57,9 @@ typings/
 # dotenv environment variables file
 .env
 
+/node_modules
+/www
+/node_modules-not-working
+/platforms/android/assets/www/assets/alerts.json
+/platforms/
+.vscode/

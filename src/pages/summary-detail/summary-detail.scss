@@ -1,0 +1,13 @@
+.toolbar-content {
+    display: flex !important;
+    justify-content: center !important;
+    ion-chip {
+        margin-left: -56px;
+        color: white;
+        background-color: blue;
+        ion-icon {
+            background-color: blue !important;
+            color: white !important;
+        }
+    }
+}

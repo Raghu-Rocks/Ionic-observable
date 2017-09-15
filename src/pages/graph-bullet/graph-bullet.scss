@@ -1,0 +1,20 @@
+.bullet-wrapper {
+    position: relative;
+    background-color: rgba(0, 0, 0, 0);
+}
+
+.ranges {
+    position: absolute;
+    top: 0;
+}
+
+.actual {
+    position: absolute;
+}
+
+.target {
+    position: absolute;
+    width: 3px;
+    top: 0;
+    bottom: 0;
+}

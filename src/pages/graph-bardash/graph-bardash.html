@@ -1,0 +1,14 @@
+<div>
+    <div class="labels-wrapper">
+        <div class="label" *ngFor="let item of labels; let i = index" [style.width.%]="barWidth - 1" [style.left.%]="i*barWidth + 1"> {{item}}</div>
+    </div>
+
+
+    <div class="bardash-wrapper" [style.height.px]="height" #bardashwrapper>
+        <div class="bar" [style.background-color]="chart_colors[0]" *ngFor="let item of barHeight; let i = index" [style.width.%]="barWidth - 1" [style.height.%]="item" [style.left.%]="i*barWidth + 1"></div>
+
+        <div class="dash" [style.background-color]="chart_colors[1]" *ngFor="let item of dashHeight; let i = index" [style.width.%]="barWidth - 1" [style.top.%]="item" [style.left.%]="i*barWidth + 1"></div>
+
+        <div class="bar-labels" *ngFor="let item of barData; let i = index" [style.width.%]="barWidth - 1" [style.left.%]="i*barWidth + 1"> {{item}}</div>
+    </div>
+</div>
