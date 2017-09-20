@@ -87,6 +87,9 @@ export class GraphDonutPage implements OnInit, AfterViewInit, OnChanges{
         width: d_width
       },
       donut: {
+        label: {
+          threshold: 0.1
+        },
         width: 15
       }
     };

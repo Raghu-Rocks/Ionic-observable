@@ -44,7 +44,7 @@ $color_organic: #21daa0;
 $color_display: #d3885f;
 $color_others: #0b94ff;
 $color_matisse_approx: #1e5799;
-$color_curious_blue_approx: #2989d8;
+$color_curious_blue_approx: #29a6cd;
 $color_mariner_approx: #207cca;
 $color_jordy_blue_approx: #7db9e8;
 $color_viking_approx: #69b6d5;
@@ -62,6 +62,12 @@ $bar_graph_bg: #464646;
 $color_astronaut_blue_approx: #0a3b66;
 $color_flamenco_approx: rgb(255, 127, 14);
 $date_text: darkslateblue;
+$default_text_color: white;
+$date_chip_background: white;
+$date_chip_text: darkslateblue;
+$color_denim_approx: #246fb3;
+$toolbar_background: $color_curious_blue_approx;
+$toolbar_text_color: white;
 // $black_100: rgba(0, 0, 0, 1);
 // App iOS Variables
 // --------------------------------------------------
@@ -86,5 +92,5 @@ $date_text: darkslateblue;
 @import "ionic.ionicons";
 // Fonts
 // --------------------------------------------------
-@import "roboto";
+// @import "roboto";
 @import "noto-sans";

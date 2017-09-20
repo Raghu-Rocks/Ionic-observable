@@ -92,6 +92,7 @@ export class GraphBulletPage  implements OnInit, OnChanges, AfterViewInit {
       if (this.target) {
           this.target = this.checkForNegatives(this.target, min);
           target_max = Math.max(...this.target);
+          this.showTarget = true;
       }
       max = Math.max(act_max, range_max, target_max);
 

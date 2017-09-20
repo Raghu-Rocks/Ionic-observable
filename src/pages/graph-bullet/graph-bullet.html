@@ -5,5 +5,5 @@
     <div class="actual" [style.background-color]="color_array[1]" *ngFor="let item of calc_actual; let i = index" [style.width.%]="item" [style.height.px]="actual_height" [style.top.px]="actual_top" [style.opacity]="actual_opacity[i]" [style.border-bottom-right-radius.px]="border_radius/2"
         [style.border-top-right-radius.px]="border_radius/2"></div>
 
-    <div class="target" [style.background-color]="color_array[2]" [style.left.%]="calc_target" [style.height.px]="calc_height"></div>
+    <div *ngIf="showTarget" class="target" [style.background-color]="color_array[2]" [style.left.%]="calc_target" [style.height.px]="calc_height"></div>
 </div>

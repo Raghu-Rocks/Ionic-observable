@@ -59,7 +59,7 @@ const cloudSettings: CloudSettings = {
         IonicStorageModule.forRoot( {name: '_DMAAPP',
     driverOrder: ['indexeddb', 'sqlite', 'websql']}),
     HomePageModule,
-    AboutPageModule,
+    // AboutPageModule,
     ChannelDetailPageModule,
     LoginPageModule,
     NotificationPageModule,

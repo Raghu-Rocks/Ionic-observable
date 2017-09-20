@@ -41,13 +41,15 @@ export class MyApp implements OnInit {
 	private iab: InAppBrowser,
     public dataProvider: DataProvider) {
 		  
+		this.checkingUserTokenForLogin();	
 		this.events.subscribe('user:created', (token) => {
-				// user and time are the same arguments passed in `events.publish(user, time)`
-    			this.dataProvider.fetchData('assets/json/data.json');		
+				let APIurl = this.validateTokenURL + token;
+				// APIurl = this.validateTokenURL + emittToken;
+			this.dataProvider.setRequestUrl(APIurl);
+   							 this.dataProvider.fetchData();
 				console.log('Welcome', token, 'at');
   		});
 	this.initializeApp();
-	this.checkingUserTokenForLogin();
     let self = this;
       // self.checkingUserTokenForLogin();
     // used for an example of ngFor and navigation
@@ -61,13 +63,18 @@ export class MyApp implements OnInit {
         self.navMenu = data;
       },
       (err) => {
-
       }
     );
-  }
+	}
   ngOnInit() {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
 	//Add 'implements OnInit' to the class.
+			this.storage.get('IMSIToken').then((val) => {
+			let APIurl = this.validateTokenURL + val;
+				// APIurl = this.validateTokenURL + emittToken;
+			this.dataProvider.setRequestUrl(APIurl);
+			this.dataProvider.fetchData();
+		});
   }
 	checkingUserTokenForLogin(){
 		this.storage.length().then((val) =>{
@@ -77,8 +84,7 @@ export class MyApp implements OnInit {
 					if(tokenLength > 0){
 						// alert("You are logged in ");
 						this.rootPage = HomePage;
-    					this.dataProvider.fetchData('assets/json/data.json');
-						
+    					// this.dataProvider.fetchData('assets/json/data.json');
 					}	
 					else{
 						// alert("Need To Login");
@@ -103,9 +109,25 @@ export class MyApp implements OnInit {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
     if (page && page.title !== 'Home') {
-      this.nav.push(page.component, page.payload);
+      let component: any = {};
+      switch (page['type']) {
+        case 'channels':
+          component = ChannelDetailPage;
+          break;
+        case 'summary':
+          component = SummaryDetailPage;
+          break;
+        case 'login':
+          component = LoginPage;
+          break;
+        case 'notification':
+          component = NotificationPage;
+          break;
+      }
+      this.nav.push(component, page.payload);
     }
   }
+
 
 	onLogOut() {
 	/* Logout Action */

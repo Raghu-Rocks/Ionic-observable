@@ -30,6 +30,7 @@ export class SummaryCardPage implements OnInit, OnChanges, AfterViewInit {
   barData: any[] = [];
   dashData: any[] = [];
   barLabels: any[] = [];
+  formatter: any;
 
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
@@ -75,6 +76,7 @@ export class SummaryCardPage implements OnInit, OnChanges, AfterViewInit {
       this.barData = this.item.getBarData();
       this.dashData = this.item.getLineData();
       this.barLabels = this.item.getBarchartLabels();
+      this.formatter = this.item.getFormatter();
     }
   }
 

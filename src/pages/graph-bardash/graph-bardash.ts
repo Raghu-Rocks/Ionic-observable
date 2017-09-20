@@ -14,7 +14,7 @@ declare var d3: any;
   templateUrl: 'graph-bardash.html',
 })
 export class GraphBardashPage {
-
+  @Input('formatter') formatter: any;
   @Input('bardata') bardata: number[];
   @Input('dashdata') dashdata: number[];
   @Input('xlabels') xLabels: string[];
@@ -60,7 +60,7 @@ export class GraphBardashPage {
   processData() {
     this.setColors();
     this.setWidth();
-    if(this.xLabels){
+    if (this.xLabels) {
       this.labels = this.xLabels;
     }
     let self = this;
@@ -68,19 +68,22 @@ export class GraphBardashPage {
     if (this.bardata) {
       this.bardata = this.checkForNegatives(this.bardata, Math.min(...this.bardata));
       this.bardata.forEach(item => {
-        if(isNaN(item)){
+        if(self.formatter){
+          this.barData.push(self.formatter(item));
+        }
+        else if (isNaN(item)) {
           this.barData.push(item);
-        }else{
+        } else {
           this.barData.push(this.kformat(item));
         }
-        
+
         self.barHeight.push((item / max) * 100);
       });
     }
 
     if (this.dashdata) {
       this.bardata = this.checkForNegatives(this.dashdata, Math.min(...this.dashdata));
-      
+
       this.dashdata.forEach(item => {
         self.dashHeight.push((1 - item / max) * 100);
       });

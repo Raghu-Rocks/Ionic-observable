@@ -9,7 +9,7 @@
     <ion-navbar>
         <ion-chip>
             <ion-icon ios="ios-alarm-outline" name="alarm" color="light"></ion-icon>
-            <ion-label>10 Sep, 2017</ion-label>
+            <ion-label>{{date}}</ion-label>
         </ion-chip>
     </ion-navbar>
 
@@ -17,5 +17,45 @@
 
 
 <ion-content padding>
+    <div class="page_name">
+        <h3>{{page_name}}</h3>
+    </div>
+    <div class="compareBullet">
+        <compare-bullet [formatter]="formatter" [todayBullet]="today_bullet" [lastWeekBullet]="lastweek_bullet" showCompare=true></compare-bullet>
+
+    </div>
+    <div class="legend-wrapper-page">
+        <span class="legend lg-actual">Actual</span>
+        <span class="legend lg-target">Target</span>
+        <span class="legend lg-projected">Projected</span>
+    </div>
+    <div class="x-axis-label">
+        <p>Hours</p>
+    </div>
+    <div class="flex-div">
+        <div class="graph-wrapper" #graphwrapper>
+            <graph-line [card]="page_data"></graph-line>
+        </div>
+        <div class="y-axis-label">
+            <svg xmlns="http://www.w3.org/2000/svg">
+            <text [attr.x]="margin_top" y="25" transform="rotate(-90,10,20)">{{label}}</text>
+            </svg>
+        </div>
+    </div>
+
 
 </ion-content>
+
+<ion-footer>
+    <ion-toolbar>
+        <button ion-button icon-only (click)="goto('HOME')">
+            <ion-icon name="home"></ion-icon>
+          </button>
+        <button ion-button icon-only (click)="goto('NOTIFICATION')">
+            <ion-icon name="mail"></ion-icon>
+          </button>
+        <button ion-button icon-only (click)="goto('SETTINGS')">
+            <ion-icon name="settings"></ion-icon>
+          </button>
+    </ion-toolbar>
+</ion-footer>

@@ -23,6 +23,7 @@ export class ChannelCardPage implements OnInit, OnChanges, AfterViewInit {
   bullet_data: any[] = [];
   bullet_colors: any[] = [];
   bullet_height: number = 18;
+  formatter: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
@@ -63,6 +64,7 @@ export class ChannelCardPage implements OnInit, OnChanges, AfterViewInit {
       }
       this.bullet_data = this.item.getBulletDataAsArray();
       this.legends = this.item.getLabels();
+      this.formatter = this.item.getFormatter();
     }
   }
 

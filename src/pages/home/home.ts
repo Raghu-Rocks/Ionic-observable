@@ -1,6 +1,12 @@
 import { Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { NavController, IonicPage } from 'ionic-angular';
 import { DataProvider } from '../../providers/data/data';
+import { ChannelDetailPage } from '../channel-detail/channel-detail';
+import { SummaryDetailPage } from '../summary-detail/summary-detail';
+import { AboutPage } from '../about/about';
+import { NotificationPage } from '../notification/notification';
+
+
 
 @IonicPage()
 @Component({
@@ -16,7 +22,6 @@ export class HomePage implements OnInit {
 
   constructor(public navCtrl: NavController, public dataProvider: DataProvider) {
     let self = this;
-    this.populateHomeCards();
     this.dataProvider.getProfileObservable().subscribe(
       (data)=>{
         if(data){
@@ -29,6 +34,7 @@ export class HomePage implements OnInit {
 
       }
     );
+    this.populateHomeCards();
 
   }
 
@@ -41,7 +47,7 @@ export class HomePage implements OnInit {
     let self = this;
     this.dataProvider.getHomeCardObservable().subscribe(
       (data: any[]) => {
-        console.log(data, 'home cards');
+        console.log(data);
         self.cards = data;
       },
       (err) => {
@@ -49,4 +55,27 @@ export class HomePage implements OnInit {
       }
     );
   }
+  openPage(page: string, payload?: any) {
+    // Reset the content nav to have just this page
+    // we wouldn't want the back button to show in this scenario
+      let component: any = {};
+      switch (page) {
+        case 'channels':
+          component = ChannelDetailPage;
+          break;
+
+        case 'summary':
+          component = SummaryDetailPage;
+          break;
+        case 'about':
+          component = AboutPage;
+          break;
+        // case 'notification':
+        //   component = NotificationPage;
+        //   break;
+      }
+      this.navCtrl.push(component, payload);
+    
+  }
+
 }

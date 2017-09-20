@@ -1,10 +1,48 @@
-<ion-card>
-    <ion-card-content>
-        <ion-grid>
-            <ion-row>
-                <ion-col col-6></ion-col>
-                <ion-col col-6></ion-col>
-            </ion-row>
-        </ion-grid>
-    </ion-card-content>
-</ion-card>
+<div [hidden]="!showCompare" class="compare-bullet-wrapper">
+    <ion-card class="compare-bullet">
+        <ion-card-content>
+            <ion-grid>
+                <ion-row>
+                    <ion-col class="left-bw bullet-wrapper" col-6>
+                        <div class="third title-wrapper">
+                            <p>Last week</p>
+                        </div>
+                        <div class="third bullet-chart-wrapper">
+                            <bullet [actual]="lastweek_data['actual']" [ranges]="lastweek_data['projected']" [target]="lastweek_data['target']" [height]="bullet_height" rounded=true [colors]="bullet_pattern"></bullet>
+                        </div>
+                        <div class="third legend-wrapper">
+                            <span class="legend lg-actual">{{legend_lw_actual}}</span>
+                            <span class="legend lg-target">{{legend_lw_target}}</span>
+                            <!-- <span class="legend lg-projected">{{legend_lw_proj}}</span> -->
+                        </div>
+                    </ion-col>
+                    <ion-col class="right-bw bullet-wrapper" col-6>
+                        <div class="third title-wrapper">
+                            <p>Today</p>
+                        </div>
+                        <div class="third bullet-chart-wrapper">
+                            <bullet [actual]="today_data['actual']" [ranges]="today_data['projected']" [target]="today_data['target']" [height]="bullet_height" rounded=true [colors]="bullet_pattern"></bullet>
+                        </div>
+                        <div class="third legend-wrapper">
+                            <span class="legend lg-actual">{{legend_td_actual}}</span>
+                            <span class="legend lg-target">{{legend_td_target}}</span>
+                            <span class="legend lg-projected">{{legend_td_proj}}</span>
+                        </div>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </ion-card-content>
+    </ion-card>
+    <div class="label-wrapper" col-12>
+        <p>{{bullet_name}}</p>
+    </div>
+</div>
+<div [hidden]="showCompare" class="today-bullet-wrapper">
+    <div class="label-box">
+        <p>{{bullet_name}}</p>
+        <ion-icon name="ios-arrow-forward"></ion-icon>
+    </div>
+    <div class="today-bullet-box">
+        <bullet [actual]="today_data['actual']" [ranges]="today_data['projected']" [target]="today_data['target']" height=18 rounded=true [colors]="bullet_pattern"></bullet>
+    </div>
+</div>

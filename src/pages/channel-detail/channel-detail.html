@@ -1,18 +1,36 @@
-<!--
-  Generated template for the ChannelDetailPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>channel-detail</ion-title>
-  </ion-navbar>
+    <ion-navbar>
+        <ion-chip>
+            <ion-icon ios="ios-alarm-outline" name="alarm" color="light"></ion-icon>
+            <ion-label>{{date}}</ion-label>
+        </ion-chip>
+    </ion-navbar>
 
 </ion-header>
 
-
 <ion-content padding>
-
+    <div class="page_name">
+        <h3>{{page_name}}</h3>
+    </div>
+    <div class="legend-wrapper-page">
+        <span class="legend lg-actual">Actual</span>
+        <span class="legend lg-target">Target</span>
+        <span class="legend lg-projected">Projected</span>
+    </div>
+    <compare-bullet *ngFor="let item of today_bullet_data; let i=index" [formatter]="formatter" [todayBullet]="today_bullet_data[i]" [lastWeekBullet]="lastweek_bullet_data[i]" [showCompare]="showCompareBullet[i]" (click)="toggleBulletState(i)"></compare-bullet>
 </ion-content>
+
+<ion-footer>
+    <ion-toolbar>
+        <button ion-button icon-only (click)="goto('HOME')">
+            <ion-icon name="home"></ion-icon>
+          </button>
+        <button ion-button icon-only (click)="goto('NOTIFICATION')">
+            <ion-icon name="mail"></ion-icon>
+          </button>
+        <button ion-button icon-only (click)="goto('SETTINGS')">
+            <ion-icon name="settings"></ion-icon>
+          </button>
+    </ion-toolbar>
+</ion-footer>

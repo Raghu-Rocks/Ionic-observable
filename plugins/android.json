@@ -33,6 +33,15 @@
         },
         "phonegap-plugin-push": {
             "PACKAGE_NAME": "io.ionic.starter"
+        },
+        "es6-promise-plugin": {
+            "PACKAGE_NAME": "adobe.dmaapp.com"
+        },
+        "cordova-plugin-x-socialsharing": {
+            "PACKAGE_NAME": "adobe.dmaapp.com"
+        },
+        "com.darktalker.cordova.screenshot": {
+            "PACKAGE_NAME": "adobe.dmaapp.com"
         }
     },
     "dependent_plugins": {}

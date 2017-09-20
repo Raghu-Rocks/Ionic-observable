@@ -1,3 +1,26 @@
 page-about {
-
+    ion-header {
+        &:after {
+            background-image: unset !important;
+            height: 0 !important;
+        }
+    }
+    .scroll-content {
+        background: linear-gradient($color_curious_blue_approx 15%, $color_denim_approx 35%);
+        text-align: center;
+        h4 {
+            color: $default_text_color;
+        }
+        img {
+            width: 150px;
+            height: 150px;
+            margin: 20px auto;
+            display: block;
+        }
+        button {
+            display: block;
+            padding: inherit 40px;
+            margin: 20px auto;
+        }
+    }
 }

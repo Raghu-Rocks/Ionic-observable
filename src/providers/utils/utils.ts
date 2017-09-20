@@ -20,7 +20,6 @@ export class UtilsProvider {
     '#0b94ff'
   ];
   constructor(public http: Http) {
-    console.log('Hello UtilsProvider Provider');
   }
 
   getColor(key: number){
@@ -29,11 +28,31 @@ export class UtilsProvider {
     }
   }
 
-  getKFormatted(num: any){
+  getKFormatted(num: any, isPer?: boolean){
     if(isNaN(num)){
       return num;
     }
+    if(isPer){
+      return num + '%';
+    }
     return this.kformat(num);
+  }
+
+  formatter = (num: any) =>{
+    if(isNaN(num)){
+      return num;
+    }else if( num < 1){
+      return num.toFixed(2);
+    }
+    return this.kformat(num);
+  }
+
+  percentFormatter = (num: any) =>{
+    return num + '%';
+  }
+
+  dollarFormatter = (num: any) => {
+    return '$' + num;
   }
 
 

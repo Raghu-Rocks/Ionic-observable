@@ -7,10 +7,10 @@ import { ChannelCard } from './models/channel-card.model';
 import { ChannelPage } from './models/channel-page.model';
 import { Subject } from 'rxjs/Subject';
 
-import { SummaryDetailPage } from '../../pages/summary-detail/summary-detail';
-import { ChannelDetailPage } from '../../pages/channel-detail/channel-detail';
-import { HomePage } from '../../pages/home/home';
-import { LoginPage } from '../../pages/login/login';
+//import { SummaryDetailPage } from '../../pages/summary-detail/summary-detail';
+//import { ChannelDetailPage } from '../../pages/channel-detail/channel-detail';
+//import { LoginPage } from '../../pages/login/login';
+//import { NotificationPage } from '../../pages/notification/notification';
 import { UtilsProvider } from '../utils/utils';
 /*
   Generated class for the DataProvider provider.
@@ -20,17 +20,23 @@ import { UtilsProvider } from '../utils/utils';
 */
 @Injectable()
 export class DataProvider {
+  APP_VERSION: string = '1.0.0';
+  REQUEST_URL: string = '';
+  DATE_STRING: string = '';
+  last_refreshed: string = '';
   homeCards: any[] = [];
   homeCardsSubject: Subject<any[]> = new Subject<any[]>();
   navBarData: any[] = [];
   navBarDataSubject: Subject<any[]> = new Subject<any[]>();
   profile: any = {};
-  profile_subject:Subject<any> = new Subject<any>()
+  profile_subject: Subject<any> = new Subject<any>();
 
   constructor(public http: Http, private utils: UtilsProvider) {
   }
 
-  fetchData(url: string) {
+  fetchData() {
+    let url: string = this.getRequestUrl();
+    this.last_refreshed = (new Date()).toISOString();
     let self = this;
     if (url) {
       this.http.get(url).subscribe(
@@ -47,7 +53,7 @@ export class DataProvider {
     }
   }
 
-  getProfileObservable(){
+  getProfileObservable() {
     return this.profile_subject.asObservable();
   }
 
@@ -58,30 +64,45 @@ export class DataProvider {
       let cards: any[] = json['cards'];
       this.setProfile(json['profile']);
 
-      // this.navBarData.push({ 'title': 'Home', 'component': HomePage });
+      this.navBarData.push({ 'title': 'Home', 'component': {} });
       cards.forEach((item) => {
+        this.DATE_STRING = item['date_today'];
+        this.last_refreshed = item['last_refreshed'];
+        let formatter: any;
+        if (item['type'] === 'percentage') {
+          formatter = this.utils.percentFormatter;
+        } else if (item['type'] === 'dollar') {
+          formatter = this.utils.dollarFormatter;
+        } else {
+          formatter = this.utils.formatter;
+        }
+
         if (item['template'] === 'channels') {
           let card = this.processChannelCard(item['name'], item['collection']);
-          let detail_pages = this.processChannelPage(item['detail_trends']);
-          console.log(detail_pages);
+          let detail_pages = this.processChannelPage(item['name'], item['detail_trends'], formatter);
+          card.setDetailPages(detail_pages);
+          card.setFormatter(formatter);
           this.homeCards.push(card);
           let nav_item = {};
           nav_item['title'] = item['name'];
-          nav_item['component'] = ChannelDetailPage;
+          nav_item['type'] = item['template']
+          nav_item['payload'] = detail_pages;
           this.navBarData.push(nav_item);
         } else if (item['template'] === 'summary' || item['template'] === 'conversion') {
           let card = this.processSummaryCard(item['template'], item['name'], item['collection']);
-          let detail_pages = this.processSummaryPage(item['template'], item['detail_trends']);
+          let detail_pages = this.processSummaryPage(item['name'], item['detail_trends'], formatter);
           card.setDetailPages(detail_pages);
+          card.setFormatter(formatter);
           this.homeCards.push(card);
           let nav_item = {};
           nav_item['title'] = item['name'];
-          nav_item['component'] = SummaryDetailPage;
+          nav_item['type'] = item['template'];
           nav_item['payload'] = detail_pages;
           this.navBarData.push(nav_item);
         }
       });
-      // this.navBarData.push({ 'title': 'Log Out', 'component': LoginPage });
+      this.navBarData.push({ 'title': 'Notifications', 'type': 'notification' })
+      // this.navBarData.push({ 'title': 'Log Out', 'type': 'login' });
       this.homeCardsSubject.next(this.homeCards);
       this.navBarDataSubject.next(this.navBarData);
     }
@@ -169,7 +190,7 @@ export class DataProvider {
     return new SummaryCard(type, name, lweek, today, barLineData);
   }
 
-  processSummaryPage(type, detail_trends: any[]) {
+  processSummaryPage(type, detail_trends: any[], formatter: any) {
     let pages: any = [];
 
 
@@ -181,16 +202,17 @@ export class DataProvider {
         let line_one_vals = [];
         let line_two_xlabels = [];
         let line_two_vals = [];
+        let is_val_per: boolean = false;
 
         item.forEach((obj, index) => {
           if (index === 0 || index === 1) {
             let bullet = {};
-            let bullet_data: any[] = [];
+            let bullet_data: any = {};
             let isPer: boolean = false;
             for (let o in obj) {
               if (Object.prototype.toString.call(obj[o]) === '[object Object]') {
                 let collection = obj[o];
-
+                let b_count = 0;
                 for (let d in collection['data']) {
                   let arr = [];
                   for (let i in collection['data'][d]) {
@@ -199,6 +221,7 @@ export class DataProvider {
                       let str: string = temp;
                       if (str.endsWith('%')) {
                         isPer = true;
+                        is_val_per = true;
                         temp = parseFloat(temp);
                       }
                     }
@@ -206,12 +229,21 @@ export class DataProvider {
 
 
                   }
-                  bullet_data.push(arr);
+                  if (b_count == 0) {
+                    bullet_data['actual'] = arr;
+                  } else if (b_count === 1) {
+                    bullet_data['target'] = arr;
+                  } else {
+                    bullet_data['projected'] = arr;
+                  }
+                  //bullet_data.push(arr);
+                  b_count++;
                 }
               }
             }
             bullet['data'] = bullet_data;
             bullet['isPer'] = isPer;
+            bullets.push(bullet);
 
           }
           else if (index === 2) {
@@ -233,7 +265,11 @@ export class DataProvider {
                     for (let d in data) {
                       let line_arr = data[d];
                       for (let x in line_arr) {
-                        let val = line_arr[x];
+                        let val: any = line_arr[x];
+                        if (isNaN(val)) {
+                          val = parseFloat(val);
+                          is_val_per = true;
+                        }
                         if (val === null) {
                           val = 'abcd';
                         }
@@ -256,6 +292,9 @@ export class DataProvider {
           }
         });
         let page = new SummaryPage(line_one_vals, line_one_xlabels, line_two_vals, line_two_xlabels, bullets, axis_labels);
+        page.setPageName(type);
+        page.setFormatter(formatter);
+        page.setDate(this.DATE_STRING);
         pages.push(page);
       });
 
@@ -283,6 +322,10 @@ export class DataProvider {
                   donut[d] = data[param][day[0]][d];
                   donut_cols.push(self.utils.getColor(i));
                 } else if (index === 1) {
+                  let temp: any = [data[param][day[0]][d]];
+                  if (isNaN(temp)) {
+                    temp = parseFloat(temp);
+                  }
                   if (bullets[d]) {
                     bullets[d][param] = [data[param][day[0]][d]];
                   } else {
@@ -303,7 +346,7 @@ export class DataProvider {
     return new ChannelCard(name, bullets, donut, donut_cols);;
   }
 
-  processChannelPage(detail_trends: any[]) {
+  processChannelPage(name: string, detail_trends: any[], formatter: any) {
     let detail_pages: any[] = [];
 
     detail_trends.forEach((page) => {
@@ -352,10 +395,10 @@ export class DataProvider {
                     iter++;
                   }
                   if (index == 0) {
-                    lastweek_bullet_data.push(bullet);
+                    lastweek_bullet_data = bullet;
                   }
                   else if (index == 1) {
-                    today_bullet_data.push(bullet);
+                    today_bullet_data = bullet;
                   }
 
 
@@ -368,6 +411,9 @@ export class DataProvider {
 
         });
         let page_obj = new ChannelPage(today_bullet_data, lastweek_bullet_data);
+        page_obj.setPageName(name);
+        page_obj.setFormatter(formatter);
+        page_obj.setDate(this.DATE_STRING);
         detail_pages.push(page_obj);
       }
 
@@ -382,6 +428,22 @@ export class DataProvider {
 
   getNavBarDataObservable() {
     return this.navBarDataSubject.asObservable();
+  }
+
+  setRequestUrl(url: string) {
+    this.REQUEST_URL = url;
+  }
+
+  getRequestUrl() {
+    return this.REQUEST_URL;
+  }
+
+  getLastRefreshed() {
+    return this.last_refreshed;
+  }
+
+  getAppVersion() {
+    return this.APP_VERSION;
   }
 
 }

@@ -1,4 +1,11 @@
 .donut {
     height: auto;
     width: 100%;
+    display: block;
+    .c3-chart-arc {
+        text {
+            fill: black;
+            font-size: 8px;
+        }
+    }
 }

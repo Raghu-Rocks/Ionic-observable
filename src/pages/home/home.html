@@ -3,7 +3,7 @@
         <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-        <ion-title>Adobe Now 1</ion-title>
+        <ion-title>Adobe Now</ion-title>
     </ion-navbar>
 </ion-header>
 
@@ -11,9 +11,9 @@
 
     <ion-grid class="profile-wrapper">
         <ion-row class="icons">
-            <ion-col col-3><img src="../../assets/images/icon_gear_40.png" class="icon-left" /></ion-col>
+            <ion-col col-3><img src="../../assets/images/icon_gear_40.png" class="icon-left" (click)="openPage('about')" /></ion-col>
             <ion-col col-6>
-                <img [src]="profile_img_url" class="profile" />
+                <img src="{{profile_img_url || 'assets/images/missing.gif'}}" class="profile" />
             </ion-col>
             <ion-col col-3><img src="../../assets/images/icon_msg_40.png" class="icon-right" /></ion-col>
         </ion-row>
@@ -26,8 +26,8 @@
     </ion-grid>
     <div class="card-wrapper" *ngFor="let item of cards">
 
-        <summary-card *ngIf="item.getType() === 'summary' || item.getType() === 'conversion'" [card]="item"></summary-card>
-        <channel-card *ngIf="item.getType() === 'channel'" [card]="item"></channel-card>
+        <summary-card *ngIf="item.getType() === 'summary' || item.getType() === 'conversion'" [card]="item" (click)="openPage(item['type'], item['detail_pages'])"></summary-card>
+        <channel-card *ngIf="item.getType() === 'channels'" [card]="item" (click)="openPage(item['type'], item['detail_pages'])"></channel-card>
     </div>
 
 </ion-content>

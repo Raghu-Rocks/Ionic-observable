@@ -1,4 +1,4 @@
-    $legend_circle_dimen: 10px;
+    $legend_circle_dimen: 8px;
     .card {
         .title {
             width: 70%;
@@ -7,7 +7,8 @@
             height: 30px;
             font-size: 16px;
             line-height: 30px;
-            text-overflow: ellipsis;
+            color: $default_text_color;
+            text-align: left;
         }
         .email-icon {
             width: 29%;
@@ -23,7 +24,8 @@
                 border-color: white;
                 border-style: solid;
                 height: 20px;
-                margin-top: 10px;
+                width: auto;
+                margin: 10px 0px auto 0px;
                 float: right;
                 background-color: white;
                 box-shadow: 1px -2px 4px rgba(0, 0, 0, 0.2);
@@ -43,15 +45,16 @@
                 margin: 0px;
             }
             .legend {
-                line-height: 10px;
-                font-size: 10px;
+                line-height: $legend_circle_dimen;
+                font-size: $legend_circle_dimen;
                 padding: 2px;
+                text-align: left;
                 span {
-                    line-height: 10px;
-                    font-size: 10px;
+                    line-height: $legend_circle_dimen;
+                    font-size: $legend_circle_dimen;
                 }
                 span::before {
-                    margin-right: 8px;
+                    margin-right: 4px;
                     content: '';
                     display: inline-block;
                     height: $legend_circle_dimen;
@@ -59,8 +62,8 @@
                     -moz-border-radius: $legend_circle_dimen;
                     -webkit-border-radius: $legend_circle_dimen;
                     border-radius: $legend_circle_dimen;
-                    line-height: 10px;
-                    font-size: 10px;
+                    line-height: $legend_circle_dimen;
+                    font-size: $legend_circle_dimen;
                     vertical-align: middle;
                 }
             }

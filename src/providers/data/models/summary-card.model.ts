@@ -1,12 +1,13 @@
-export class SummaryCard{
+export class SummaryCard {
     type: string;
     name: string;
     lastWeekBullet: any = {};
     todayBullet: any = {};
     barChartData: any = {};
     detail_pages: any[] = [];
-
-    constructor(type: string, name:string, lastWeekBullet: any, todayBullet: any, barChartData:any){
+    formatter: any;
+    
+    constructor(type: string, name: string, lastWeekBullet: any, todayBullet: any, barChartData: any) {
         this.type = type;
         this.name = name;
         this.lastWeekBullet = lastWeekBullet;
@@ -14,59 +15,67 @@ export class SummaryCard{
         this.barChartData = barChartData
     }
 
-    getType(){
+    getType() {
         return this.type;
     }
 
-    getName(){
+    getName() {
         return this.name;
     }
 
-    getTodayBullet(){
+    getTodayBullet() {
         return this.todayBullet;
     }
 
-    getLastWeekBullet(){
+    getLastWeekBullet() {
         return this.lastWeekBullet;
     }
 
-    getBarLineChartData(){
+    getBarLineChartData() {
         return this.barChartData;
     }
 
-    getBulletLegends(bullet: string){
-        if(bullet === 'TODAY'){
+    getBulletLegends(bullet: string) {
+        if (bullet === 'TODAY') {
             return this.todayBullet['vars'];
-        }else if(bullet === 'LASTWEEK'){
+        } else if (bullet === 'LASTWEEK') {
             return this.lastWeekBullet['vars'];
         }
     }
 
-    getBulletData(bullet: string){
-        if(bullet === 'TODAY'){
+    getBulletData(bullet: string) {
+        if (bullet === 'TODAY') {
             return this.todayBullet['vals'];
-        }else if(bullet === 'LASTWEEK'){
+        } else if (bullet === 'LASTWEEK') {
             return this.lastWeekBullet['vals'];
         }
     }
 
-    getBarData(){
+    getBarData() {
         return this.barChartData['bar'] || [];
     }
 
-    getLineData(){
+    getLineData() {
         return this.barChartData['line'] || [];
     }
 
-    getBarchartLabels(){
+    getBarchartLabels() {
         return this.barChartData['labels'] || [];
     }
 
-    setDetailPages(detail_pages: any[]){
+    setDetailPages(detail_pages: any[]) {
         this.detail_pages = detail_pages;
     }
 
-    getDetailPages(){
+    getDetailPages() {
         return this.detail_pages;
+    }
+
+    setFormatter(formatter: any) {
+        this.formatter = formatter;
+    }
+
+    getFormatter() {
+        return this.formatter;
     }
 }

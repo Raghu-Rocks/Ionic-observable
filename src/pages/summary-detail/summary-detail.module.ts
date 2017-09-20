@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 import { SummaryDetailPage } from './summary-detail';
-
-import { GraphBulletPageModule } from '../graph-bullet/graph-bullet.module';
+import { CompareBulletPageModule } from '../compare-bullet/compare-bullet.module';
+import { GraphLinePageModule } from '../graph-line/graph-line.module';
+import { AboutPageModule } from '../about/about.module';
 
 @NgModule({
   declarations: [
@@ -10,6 +11,9 @@ import { GraphBulletPageModule } from '../graph-bullet/graph-bullet.module';
   ],
   imports: [
     IonicPageModule.forChild(SummaryDetailPage),
+    AboutPageModule,
+    CompareBulletPageModule,
+    GraphLinePageModule
   ],
   exports:[SummaryDetailPage]
 })

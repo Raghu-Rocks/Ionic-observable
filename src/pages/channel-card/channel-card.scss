@@ -1,88 +1,137 @@
-$legend_circle_dimen: 8px;
-.card {
-    .title {
-        width: 70%;
-        float: left;
-        padding: 2px 6px;
-        height: 30px;
-        font-size: 16px;
-        line-height: 30px;
-        text-overflow: ellipsis;
-    }
-    .email-icon {
-        width: 29%;
-        float: left;
-        padding: 0px 12px;
-        img {
-            border-right-width: 8px;
-            border-left-width: 8px;
-            border-top-width: 6px;
-            border-bottom-width: 0px;
-            border-top-left-radius: 4px;
-            border-top-right-radius: 4px;
-            border-color: white;
-            border-style: solid;
-            height: 20px;
-            margin-top: 10px;
-            float: right;
-            background-color: white;
-            box-shadow: 1px -2px 4px rgba(0, 0, 0, 0.2);
+channel-card {
+    $legend_circle_dimen: 8px;
+    .card {
+        .title {
+            width: 70%;
+            float: left;
+            padding: 2px 6px;
+            height: 30px;
+            font-size: 16px;
+            line-height: 30px;
+            color: $default_text_color;
+            text-align: left;
         }
-    }
-    ion-card {
-        .legends-wrapper {
-            justify-content: center;
-        }
-        .donut-wrapper {
-            padding: 2px;
-            text-align: center;
-        }
-        .bullets-wrapper {
-            padding: 2px;
-            text-align: center;
-            ion-col[col-12] {
-                display: inline-block;
+        .email-icon {
+            width: 29%;
+            float: left;
+            padding: 0px 12px;
+            img {
+                border-right-width: 8px;
+                border-left-width: 8px;
+                border-top-width: 6px;
+                border-bottom-width: 0px;
+                border-top-left-radius: 4px;
+                border-top-right-radius: 4px;
+                border-color: white;
+                border-style: solid;
+                height: 20px;
+                width: auto;
+                margin: 10px 0px auto 0px;
+                float: right;
+                background-color: white;
+                box-shadow: 1px -2px 4px rgba(0, 0, 0, 0.2);
             }
         }
-        .legends {
-            text-overflow: ellipsis;
-            margin: 3px;
-            font-size: 10px;
-            &:before {
-                margin: 2px 4px;
-                content: '';
-                display: inline-block;
-                height: $legend_circle_dimen;
-                width: $legend_circle_dimen;
-                -moz-border-radius: $legend_circle_dimen;
-                -webkit-border-radius: $legend_circle_dimen;
-                border-radius: $legend_circle_dimen;
-                vertical-align: middle;
+        ion-card {
+            .legends-wrapper {
+                justify-content: center;
             }
-        }
-        .legends:nth-child(1) {
-            &:before {
-                background-color: #d5406a;
+            .donut-wrapper {
+                //display: flex;
+                //justify-content: center;
+                //align-items: center;
+                //max-height: unset;
+                padding: 2px;
             }
-        }
-        .legends:nth-child(2) {
-            &:before {
-                background-color: #0d6580;
+            .title-wrapper {
+                padding: 2px;
+                text-align: center;
             }
-        }
-        .legends:nth-child(3) {
-            &:before {
-                background-color: #21daa0;
+            .bullets-wrapper {
+                padding: 2px;
+                text-align: center;
+                ion-col[col-12] {
+                    display: inline-block;
+                    text-align: left;
+                    p {
+                        padding: 0px;
+                        margin: 0px;
+                        line-height: 9px;
+                    }
+                    .legend {
+                        font-size: 8px;
+                        line-height: 8px;
+                        padding: 0px;
+                        margin: 1px 3px;
+                        display: inline;
+                        &.actual {
+                            &[index='0'] {
+                                &:before {
+                                    background-color: #d5406a;
+                                }
+                            }
+                            &[index='1'] {
+                                &:before {
+                                    background-color: #0d6580;
+                                }
+                            }
+                            &[index='2'] {
+                                &:before {
+                                    background-color: #21daa0;
+                                }
+                            }
+                        }
+                        &.projected {
+                            &:before {
+                                background-color: lightgrey;
+                            }
+                        }
+                    }
+                }
             }
-        }
-        .legends:nth-child(4) {
-            &:before {
-                background-color: #d3885f;
+            .legend {
+                text-overflow: ellipsis;
+                margin: 3px;
+                font-size: 10px;
+                color: black;
+                &:before {
+                    margin: 2px 4px;
+                    content: '';
+                    display: inline-block;
+                    height: $legend_circle_dimen;
+                    width: $legend_circle_dimen;
+                    -moz-border-radius: $legend_circle_dimen;
+                    -webkit-border-radius: $legend_circle_dimen;
+                    border-radius: $legend_circle_dimen;
+                    line-height: 10px;
+                    font-size: 10px;
+                    vertical-align: middle;
+                }
             }
-        }
-        .legends:nth-child(5) {
-            &:before {
-                background-color: #0b94ff;
+            .legends:nth-child(1) {
+                &:before {
+                    background-color: #d5406a;
+                }
+            }
+            .legends:nth-child(2) {
+                &:before {
+                    background-color: #0d6580;
+                }
+            }
+            .legends:nth-child(3) {
+                &:before {
+                    background-color: #21daa0;
+                }
+            }
+            .legends:nth-child(4) {
+                &:before {
+                    background-color: #d3885f;
+                }
+            }
+            .legends:nth-child(5) {
+                &:before {
+                    background-color: #0b94ff;
+                }
             }
         }
     }

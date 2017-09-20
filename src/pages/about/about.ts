@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, OnChanges, SimpleChanges, Inject } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { DataProvider } from '../../providers/data/data';
 
 /**
  * Generated class for the AboutPage page.
@@ -12,14 +13,45 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 @Component({
   selector: 'page-about',
   templateUrl: 'about.html',
+  providers: [DataProvider]
 })
-export class AboutPage {
-
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+export class AboutPage implements OnInit, OnChanges {
+  last_refreshed: string = '';
+  version: string = '';
+  //@Inject(DataProvider) private dataProvider: DataProvider;
+  constructor(public navCtrl: NavController, public navParams: NavParams
+     , public dataProvider: DataProvider 
+  ) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad AboutPage');
+    this.getLastRefreshed();
+  }
+
+  ngOnInit() {
+    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
+    //Add 'implements OnInit' to the class.
+    this.getLastRefreshed();
+    this.getVersion();
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    //Called before any other lifecycle hook. Use it to inject dependencies, but avoid any serious work here.
+    //Add '${implements OnChanges}' to the class.
+  }
+
+  refresh(){
+    this.dataProvider.fetchData();
+    this.getLastRefreshed();
+  }
+
+  getLastRefreshed(){
+    this.last_refreshed = this.dataProvider.getLastRefreshed();
+  }
+
+  getVersion(){
+    this.version = this.dataProvider.getAppVersion();
   }
 
 }

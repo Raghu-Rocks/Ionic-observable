@@ -1,13 +1,153 @@
-.toolbar-content {
-    display: flex !important;
-    justify-content: center !important;
-    ion-chip {
-        margin-left: -56px;
-        color: white;
-        background-color: blue;
-        ion-icon {
-            background-color: blue !important;
-            color: white !important;
+page-summary-detail {
+    .scroll-content {
+        background: linear-gradient($color_curious_blue_approx 15%, $color_denim_approx 35%);
+    }
+    .toolbar-content {
+        display: flex !important;
+        justify-content: center !important;
+        ion-chip {
+            margin-left: -56px;
+            color: $date_chip_text;
+            background-color: $date_chip_background;
+            ion-icon {
+                background-color: $date_chip_background !important;
+                &:before {
+                    color: $date_chip_text !important;
+                }
+            }
+            ion-label {
+                margin: 0px 10px 0px 0px;
+                font-weight: 500;
+            }
+        }
+    }
+    ion-content {
+        text-align: right;
+        .flex-div {
+            width: 100%;
+            display: flex;
+        }
+        .graph-wrapper {
+            width: 90%;
+            float: left;
+        }
+        .y-axis-label {
+            width: 9%;
+            float: left;
+            position: relative;
+            text-align: left;
+            padding-top: 30px;
+            svg {
+                height: 100%;
+                width: 100%;
+            }
+            p {
+                margin: 0;
+                position: absolute;
+                width: max-content;
+                margin-left: -14px;
+                color: $default_text_color;
+            }
+            text {
+                -webkit-text-fill-color: $default_text_color;
+                fill: $default_text_color;
+            }
+        }
+        .x-axis-label {
+            padding: 0 50px;
+            p {
+                margin: 0 10px;
+                text-align: left;
+                color: $default_text_color;
+            }
+        }
+        .page_name {
+            text-align: center;
+            margin: 20px 10px;
+            h3 {
+                color: $default_text_color;
+                font-weight: 300;
+            }
+        }
+        .legend-wrapper-page {
+            text-align: right;
+            margin: 10px;
+            .legend {
+                color: $default_text_color;
+                font-size: 10px;
+                line-height: 10px;
+                margin-right: 5px;
+                &:before {
+                    content: "";
+                    height: 8px;
+                    width: 8px;
+                    border-radius: 8px;
+                    line-height: 10px;
+                    margin: 0 3px;
+                    background-color: black;
+                    display: inline-block;
+                    vertical-align: middle;
+                }
+                &.lg-actual {
+                    &:before {
+                        background-color: orange;
+                    }
+                }
+                &.lg-target {
+                    &:before {
+                        background-color: $color_target_legend;
+                    }
+                }
+                &.lg-projected {
+                    &:before {
+                        background-color: lightgrey;
+                    }
+                }
+            }
+        }
+    }
+    .rotate {
+        /* Safari */
+        -webkit-transform: rotate(-90deg);
+        /* Firefox */
+        -moz-transform: rotate(-90deg);
+        /* IE */
+        -ms-transform: rotate(-90deg);
+        /* Opera */
+        -o-transform: rotate(-90deg);
+        /* Internet Explorer */
+        // filter: progid: DXImageTransform.Microsoft.BasicImage(rotation=3);
+    }
+    ion-header {
+        &:after {
+            background-image: unset !important;
+            height: 0 !important;
+        }
+    }
+    ion-footer {
+        .toolbar-background {
+            background: black;
+        }
+        .toolbar-content {
+            .button {
+                width: 33%;
+                float: left;
+                height: 40px;
+                padding: 0;
+                border: none;
+                border-radius: 0;
+                margin: 0;
+                z-index: inherit;
+                background-color: unset;
+            }
+        }
+    }
+    @media only screen and (orientation: landscape) {
+        .scroll-content {
+            padding: 16px 15% !important;
+            .compareBullet {
+                padding: 0 10% !important;
+            }
         }
     }
 }
