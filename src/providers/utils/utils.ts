@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { C3ServiceProvider, D3, C3 } from '../c3-service/c3-service';
-import * as d3 from 'd3'
+import * as d3 from 'd3';
 /*
   Generated class for the UtilsProvider provider.
 
@@ -45,7 +45,7 @@ export class UtilsProvider {
     } else if (isNaN(num)) {
       return num;
     } else if (num < 1) {
-      return num.toFixed(2);
+      return parseFloat(num).toFixed(2);
     }
     return this.kformat(num);
   }
