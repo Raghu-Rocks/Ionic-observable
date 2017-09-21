@@ -9,7 +9,7 @@ import { DataProvider } from '../../providers/data/data';
  * on Ionic pages and navigation.
  */
 
-//@IonicPage()
+@IonicPage()
 @Component({
   selector: 'page-about',
   templateUrl: 'about.html'

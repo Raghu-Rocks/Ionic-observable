@@ -3,12 +3,7 @@ import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { C3ServiceProvider, D3, C3 } from '../c3-service/c3-service';
 import * as d3 from 'd3';
-/*
-  Generated class for the UtilsProvider provider.
 
-  See https://angular.io/docs/ts/latest/guide/dependency-injection.html
-  for more info on providers and Angular DI.
-*/
 // declare var d3: any;
 @Injectable()
 export class UtilsProvider {

@@ -1,0 +1,71 @@
+graph-line {
+    rect.c3-zoom-rect {
+        opacity: 1 !important;
+        stroke: black !important;
+        fill: none !important;
+        stroke-width: 0.5 !important;
+        stroke-opacity: 0.4 !important;
+    }
+    g.c3-grid {
+        g.c3-xgrids {
+            line.c3-xgrid {
+                stroke: black !important;
+                stroke-opacity: 0.4 !important;
+                stroke-width: 0.5 !important;
+            }
+        }
+        g.c3-ygrids {
+            line.c3-ygrid {
+                stroke: black !important;
+                stroke-opacity: 0.4 !important;
+                stroke-width: .9 !important;
+            }
+        }
+    }
+    .line-chart {
+        width: 100%;
+        .c3-axis-y {
+            g {
+                &.tick {
+                    text {
+                        fill: $default_text_color;
+                    }
+                    line {
+                        display: none;
+                    }
+                }
+            }
+            path {
+                &.domain {
+                    display: none;
+                }
+            }
+        }
+        .c3-axis-x {
+            g {
+                &.tick {
+                    text {
+                        fill: $default_text_color;
+                    }
+                    line {
+                        display: none;
+                    }
+                    &:nth-child(even) {
+                        display: none;
+                    }
+                }
+            }
+            path {
+                &.domain {
+                    display: none;
+                }
+            }
+        }
+        .c3-xgrid {
+            stroke-dasharray: unset;
+        }
+        .c3-ygrid {
+            stroke-dasharray: unset;
+        }
+    }
+}

@@ -7,10 +7,6 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 import { HomePage } from '../pages/home/home';
 import { LoginPage } from '../pages/login/login';
-import { NotificationPage } from '../pages/notification/notification';
-import { AboutPage } from '../pages/about/about';
-import { SummaryDetailPage } from '../pages/summary-detail/summary-detail';
-import { ChannelDetailPage } from '../pages/channel-detail/channel-detail';
 import { ListPage } from '../pages/list/list';
 import { DataProvider } from '../providers/data/data';
 @Component({
@@ -112,16 +108,16 @@ export class MyApp implements OnInit {
       let component: any = {};
       switch (page['type']) {
         case 'channels':
-          component = ChannelDetailPage;
+          component = "ChannelDetailPage";
           break;
         case 'summary':
-          component = SummaryDetailPage;
+          component = "SummaryDetailPage";
           break;
         case 'login':
           component = LoginPage;
           break;
         case 'notification':
-          component = NotificationPage;
+          component = "NotificationPage";
           break;
       }
       this.nav.push(component, page.payload);

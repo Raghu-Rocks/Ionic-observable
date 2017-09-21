@@ -1,0 +1,37 @@
+<div class="card">
+    <div class="title">
+        {{name}}
+    </div>
+    <div class="email-icon">
+        <img src="assets/images/email.png" />
+    </div>
+    <ion-card  (click)="navigateToDetailScreen()">
+        <ion-card-content>
+            <ion-grid>
+                <ion-row>
+                    <ion-col class="title-wrapper" col-6>
+                        <p>Today</p>
+                    </ion-col>
+                    <ion-col class="title-wrapper" col-6>
+                        <p>Today</p>
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col class="donut-wrapper" col-6>
+                        <donut [data]="donut_data" [colors]="donut_colors"></donut>
+                    </ion-col>
+                    <ion-col class="bullets-wrapper" col-6>
+                        <ion-col *ngFor="let item of bullet_data; let i = index" col-12>
+                            <p><span class="legend actual" [attr.index]="i">{{formatter(item.data[0])}}</span><span class="legend projected">{{formatter(item.data[1])}}</span></p>
+                            <bullet [actual]="item.data[0]" [ranges]="item.data[1]" [height]="bullet_height" rounded=true [colors]="bullet_colors[i]"></bullet>
+                        </ion-col>
+                    </ion-col>
+                </ion-row>
+
+                <ion-row class="legends-wrapper">
+                    <span *ngFor="let item of legends" class="legend legends" [attr.name]="item">{{item}}</span>
+                </ion-row>
+            </ion-grid>
+        </ion-card-content>
+    </ion-card>
+</div>

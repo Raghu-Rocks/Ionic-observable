@@ -84,7 +84,7 @@
     "cordova-plugin-x-socialsharing": {
         "source": {
             "type": "registry",
-            "id": "cordova-plugin-x-socialsharing"
+            "id": "cordova-plugin-x-socialsharing@^5.2.0"
         },
         "is_top_level": true,
         "variables": {}
@@ -92,7 +92,7 @@
     "com.darktalker.cordova.screenshot": {
         "source": {
             "type": "registry",
-            "id": "com.darktalker.cordova.screenshot"
+            "id": "com.darktalker.cordova.screenshot@^0.1.6"
         },
         "is_top_level": true,
         "variables": {}

@@ -16,13 +16,12 @@ import { HttpModule } from '@angular/http';
 import { IonicStorageModule } from '@ionic/storage';
 import { CloudSettings, CloudModule } from '@ionic/cloud-angular';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
+import { Screenshot } from '@ionic-native/screenshot';
+import { SocialSharing } from '@ionic-native/social-sharing';
 
 import { HomePageModule } from '../pages/home/home.module';
-// import { AboutPageModule } from '../pages/about/about.module';
-import { ChannelDetailPageModule } from '../pages/channel-detail/channel-detail.module';
 import { LoginPageModule } from '../pages/login/login.module';
 import { NotificationPageModule } from '../pages/notification/notification.module';
-import { SummaryDetailPageModule } from '../pages/summary-detail/summary-detail.module';
 
 
 const cloudSettings: CloudSettings = {
@@ -54,16 +53,11 @@ const cloudSettings: CloudSettings = {
     BrowserModule,
     HttpModule,
     IonicModule.forRoot(MyApp),
-        CloudModule.forRoot(cloudSettings),
-
-        IonicStorageModule.forRoot( {name: '_DMAAPP',
-    driverOrder: ['indexeddb', 'sqlite', 'websql']}),
+    CloudModule.forRoot(cloudSettings),
+    IonicStorageModule.forRoot( {name: '_DMAAPP',
+      driverOrder: ['indexeddb', 'sqlite', 'websql']}),
     HomePageModule,
-    // AboutPageModule,
-    // ChannelDetailPageModule,
     LoginPageModule,
-    NotificationPageModule,
-    // SummaryDetailPageModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -77,7 +71,9 @@ const cloudSettings: CloudSettings = {
     UtilsProvider,
     NotificationProvider,
     C3ServiceProvider,
-    InAppBrowser
+    InAppBrowser,
+    Screenshot,
+    SocialSharing
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })
