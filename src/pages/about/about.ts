@@ -9,11 +9,12 @@ import { DataProvider } from '../../providers/data/data';
  * on Ionic pages and navigation.
  */
 
-@IonicPage()
+//@IonicPage()
 @Component({
   selector: 'page-about',
-  templateUrl: 'about.html',
-  providers: [DataProvider]
+  templateUrl: 'about.html'
+  //,
+  //providers: [DataProvider]
 })
 export class AboutPage implements OnInit, OnChanges {
   last_refreshed: string = '';
@@ -22,10 +23,15 @@ export class AboutPage implements OnInit, OnChanges {
   constructor(public navCtrl: NavController, public navParams: NavParams
      , public dataProvider: DataProvider 
   ) {
+    this.dataProvider.getHomeCardObservable().subscribe(
+      data => {
+        this.getLastRefreshed();
+        this.getVersion();
+      }
+    );
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad AboutPage');
     this.getLastRefreshed();
   }
 
@@ -44,6 +50,8 @@ export class AboutPage implements OnInit, OnChanges {
   refresh(){
     this.dataProvider.fetchData();
     this.getLastRefreshed();
+    this.navCtrl.setRoot(this.navCtrl.getActive().component);
+    this.navCtrl.setRoot("HomePage");
   }
 
   getLastRefreshed(){

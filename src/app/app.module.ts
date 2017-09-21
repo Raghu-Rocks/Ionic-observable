@@ -18,7 +18,7 @@ import { CloudSettings, CloudModule } from '@ionic/cloud-angular';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 import { HomePageModule } from '../pages/home/home.module';
-import { AboutPageModule } from '../pages/about/about.module';
+// import { AboutPageModule } from '../pages/about/about.module';
 import { ChannelDetailPageModule } from '../pages/channel-detail/channel-detail.module';
 import { LoginPageModule } from '../pages/login/login.module';
 import { NotificationPageModule } from '../pages/notification/notification.module';
@@ -60,10 +60,10 @@ const cloudSettings: CloudSettings = {
     driverOrder: ['indexeddb', 'sqlite', 'websql']}),
     HomePageModule,
     // AboutPageModule,
-    ChannelDetailPageModule,
+    // ChannelDetailPageModule,
     LoginPageModule,
     NotificationPageModule,
-    SummaryDetailPageModule
+    // SummaryDetailPageModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
