@@ -56,7 +56,6 @@ export class GraphDonutPage implements OnInit, AfterViewInit, OnChanges{
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad GraphDonutPage');
   }
 
   setData(){
@@ -82,7 +81,6 @@ export class GraphDonutPage implements OnInit, AfterViewInit, OnChanges{
         show: false
       },
       size: {
-        // height: this.donutPerentHeight
         height: d_height,
         width: d_width
       },
@@ -100,7 +98,6 @@ export class GraphDonutPage implements OnInit, AfterViewInit, OnChanges{
     }
 
     if(this.donutView){
-      console.log('donut', this.donutDataArray, this.color_pattern);
       c3.generate(options);
     }
 

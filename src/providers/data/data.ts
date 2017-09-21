@@ -6,7 +6,7 @@ import { SummaryPage } from './models/summary-page.model';
 import { ChannelCard } from './models/channel-card.model';
 import { ChannelPage } from './models/channel-page.model';
 import { Subject } from 'rxjs/Subject';
-
+import * as d3 from 'd3'
 //import { SummaryDetailPage } from '../../pages/summary-detail/summary-detail';
 //import { ChannelDetailPage } from '../../pages/channel-detail/channel-detail';
 //import { LoginPage } from '../../pages/login/login';
@@ -36,7 +36,8 @@ export class DataProvider {
 
   fetchData() {
     let url: string = this.getRequestUrl();
-    this.last_refreshed = (new Date()).toISOString();
+    //this.last_refreshed = (new Date()).toISOString();
+    console.log('fetching data', url);
     let self = this;
     if (url) {
       this.http.get(url).subscribe(
@@ -47,6 +48,7 @@ export class DataProvider {
   }
 
   setProfile(obj: any) {
+    console.log('settin profile');
     if (obj) {
       this.profile = obj;
       this.profile_subject.next(this.profile);
@@ -58,6 +60,7 @@ export class DataProvider {
   }
 
   parseData(json: any) {
+    console.log('parsing data');
     if (json && json['cards']) {
       this.homeCards = [];
       this.navBarData = [];
@@ -78,6 +81,7 @@ export class DataProvider {
         }
 
         if (item['template'] === 'channels') {
+          console.log('parsing channel');
           let card = this.processChannelCard(item['name'], item['collection']);
           let detail_pages = this.processChannelPage(item['name'], item['detail_trends'], formatter);
           card.setDetailPages(detail_pages);
@@ -89,6 +93,7 @@ export class DataProvider {
           nav_item['payload'] = detail_pages;
           this.navBarData.push(nav_item);
         } else if (item['template'] === 'summary' || item['template'] === 'conversion') {
+          console.log('parsing summary');
           let card = this.processSummaryCard(item['template'], item['name'], item['collection']);
           let detail_pages = this.processSummaryPage(item['name'], item['detail_trends'], formatter);
           card.setDetailPages(detail_pages);
@@ -102,7 +107,7 @@ export class DataProvider {
         }
       });
       this.navBarData.push({ 'title': 'Notifications', 'type': 'notification' })
-      // this.navBarData.push({ 'title': 'Log Out', 'type': 'login' });
+      this.navBarData.push({ 'title': 'Log Out', 'type': 'login' });
       this.homeCardsSubject.next(this.homeCards);
       this.navBarDataSubject.next(this.navBarData);
     }

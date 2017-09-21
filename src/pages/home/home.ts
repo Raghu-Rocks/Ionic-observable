@@ -5,9 +5,6 @@ import { ChannelDetailPage } from '../channel-detail/channel-detail';
 import { SummaryDetailPage } from '../summary-detail/summary-detail';
 import { AboutPage } from '../about/about';
 import { NotificationPage } from '../notification/notification';
-
-
-
 @IonicPage()
 @Component({
   selector: 'page-home',
@@ -22,6 +19,7 @@ export class HomePage implements OnInit {
 
   constructor(public navCtrl: NavController, public dataProvider: DataProvider) {
     let self = this;
+    this.populateHomeCards();
     this.dataProvider.getProfileObservable().subscribe(
       (data)=>{
         if(data){
@@ -34,7 +32,6 @@ export class HomePage implements OnInit {
 
       }
     );
-    this.populateHomeCards();
 
   }
 
@@ -70,9 +67,9 @@ export class HomePage implements OnInit {
         case 'about':
           component = AboutPage;
           break;
-        // case 'notification':
-        //   component = NotificationPage;
-        //   break;
+        case 'notification':
+          component = NotificationPage;
+          break;
       }
       this.navCtrl.push(component, payload);
     
