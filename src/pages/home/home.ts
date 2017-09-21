@@ -1,6 +1,8 @@
 import { Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { NavController, IonicPage } from 'ionic-angular';
 import { DataProvider } from '../../providers/data/data';
+import { SocialSharing } from '@ionic-native/social-sharing';
+import { Screenshot } from '@ionic-native/screenshot';
 
 @IonicPage()
 @Component({
@@ -14,7 +16,8 @@ export class HomePage implements OnInit {
   profile_company: string = '';
   profile_img_url: string = '';
 
-  constructor(public navCtrl: NavController, public dataProvider: DataProvider) {
+  constructor(public navCtrl: NavController, public dataProvider: DataProvider,
+      private screenshot: Screenshot, private socialSharing: SocialSharing,) {
     let self = this;
     this.populateHomeCards();
     this.dataProvider.getProfileObservable().subscribe(
@@ -74,5 +77,19 @@ export class HomePage implements OnInit {
   //     this.navCtrl.push(component, payload);
     
   // }
+  socialShare() {
+    var screen
+    this.screenshot.URI(80).then(res => {
+      screen = res.URI;
+      console.log(screen, 'path');
+      //   console.log(screen);
+      this.socialSharing.share(null, null, screen, null).then(() => {
+      console.log("shareSheetShare: Success");
+      }).catch((Error) => {
+          console.error("shareSheetShare: failed"+ Error);
+        });
+    });
+    // console.log(this.screen, 'screen')
+  }
 
 }

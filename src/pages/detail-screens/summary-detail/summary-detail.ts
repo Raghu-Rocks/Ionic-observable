@@ -1,5 +1,7 @@
 import { Component, AfterViewInit, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { SocialSharing } from '@ionic-native/social-sharing';
+import { Screenshot } from '@ionic-native/screenshot';
 
 @IonicPage()
 @Component({
@@ -19,7 +21,8 @@ export class SummaryDetailPage implements AfterViewInit {
   formatter: any;
   date: string = '';
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,
+      private screenshot: Screenshot, private socialSharing: SocialSharing,) {
     if (Object.prototype.toString.call(navParams.data) === '[object Array]') {
       this.page_data = navParams.data[0];
       this.page_name = this.page_data['page_name'];
@@ -50,15 +53,26 @@ export class SummaryDetailPage implements AfterViewInit {
       case 'HOME':
         this.navCtrl.pop();
         break;
-      case 'NOTIFICATION':
-        this.navCtrl.push("NotificationPage");
-        break;
       case 'SETTINGS':
         this.navCtrl.push("AboutPage");
         break;
       default:
         break;
     }
+  }
+  socialShare() {
+    var screen
+    this.screenshot.URI(80).then(res => {
+      screen = res.URI;
+      console.log(screen, 'path');
+      //   console.log(screen);
+      this.socialSharing.share(null, null, screen, null).then(() => {
+      console.log("shareSheetShare: Success");
+      }).catch((Error) => {
+          console.error("shareSheetShare: failed"+ Error);
+        });
+    });
+    // console.log(this.screen, 'screen')
   }
 
 }

@@ -15,7 +15,7 @@
             <ion-col col-6>
                 <img src="{{profile_img_url || 'assets/images/missing.gif' }}" class="profile" />
             </ion-col>
-            <ion-col col-3><img src="assets/images/icon_msg_40.png" class="icon-right" /></ion-col>
+            <ion-col col-3><img src="assets/images/icon_msg_40.png" class="icon-right" (click)="socialShare()"/></ion-col>
         </ion-row>
         <ion-row>
             <ion-col col-12 class="credentials">

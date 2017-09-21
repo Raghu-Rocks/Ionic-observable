@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { CompareBulletPage } from '../../graphs/compare-bullet/compare-bullet';
+import { SocialSharing } from '@ionic-native/social-sharing';
+import { Screenshot } from '@ionic-native/screenshot';
 
 @IonicPage()
 @Component({
@@ -15,7 +17,8 @@ export class ChannelDetailPage {
   page_name: string = '';
   formatter: any;
   date: string;
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,
+      private screenshot: Screenshot, private socialSharing: SocialSharing,) {
     console.log('inside detail', navParams);
     if (Object.prototype.toString.call(navParams.data) === '[object Array]') {
       this.page_data = navParams.data[0];
@@ -67,15 +70,25 @@ export class ChannelDetailPage {
       case 'HOME':
         this.navCtrl.pop();
         break;
-      case 'NOTIFICATION':
-        this.navCtrl.push("NotificationPage");
-        break;
-      case 'SETTINGS':
+      case 'ABOUT':
         this.navCtrl.push("AboutPage");
         break;
       default:
         break;
     }
   }
-
+  socialShare() {
+    var screen
+    this.screenshot.URI(80).then(res => {
+      screen = res.URI;
+      console.log(screen, 'path');
+      //   console.log(screen);
+      this.socialSharing.share(null, null, screen, null).then(() => {
+      console.log("shareSheetShare: Success");
+      }).catch((Error) => {
+          console.error("shareSheetShare: failed"+ Error);
+        });
+    });
+    // console.log(this.screen, 'screen')
+  }
 }
