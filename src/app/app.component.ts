@@ -129,10 +129,10 @@ export class MyApp implements OnInit {
 	/* Logout Action */
 		var logOutURL = this.logOutURLBase + this.authToken;
 		var browser = this.iab.create(logOutURL, "_blank", "location=no,toolbar=no");
-		this.nav.push(LoginPage);
 		browser.on('loadstop').subscribe((data) => {
 			if (data.url.indexOf(this.logoutURLFormat) !== -1) {
 				this.storage.clear(); 
+				this.nav.push(LoginPage);
 				browser.close();
 			}
 		});
